@@ -64,6 +64,22 @@ class User extends REST_Controller {
         }
     }
 
+    public function get_user_post()
+    {
+        $result = $this->user_model->get_id_user_by_token();
+        if (!empty($result))
+        {
+            $this->set_response(['status' => TRUE, 'id' => $result], REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+        }
+        else
+        {
+            $this->set_response([
+                'status' => FALSE,
+                'message' => 'Token is not valid'
+            ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+        }
+    }
+
     public function register_get()
     {
         // Users from a data store e.g. database

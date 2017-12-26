@@ -133,12 +133,6 @@ input {
 </div>
 
 <ul id="myUL">
-  <li>Hit the gym</li>
-  <li class="checked">Pay bills</li>
-  <li>Meet George</li>
-  <li>Buy eggs</li>
-  <li>Read a book</li>
-  <li>Organize office</li>
 </ul>
 
 <script>
@@ -157,7 +151,9 @@ $( document ).ready(function() {
   var input = {'token': token};
   $.post( "http://localhost:8002/index.php/api/todo/list", input, function(data) {
       console.log(data);
-      
+      for (var i = 0; i < data.length; i++) {
+        $('#myUL').append('<li>'+data[i].content+'</li>')
+      }      
   });
 
 });
@@ -207,10 +203,10 @@ function newElement() {
   }
   document.getElementById("myInput").value = "";
 
-  var input = {'email': inputValue, 'password': 'conheo'};
-  $.post( "http://localhost:8001/index.php/api/user/register", input, function(data) {
-    alert( "Data Loaded: " + data );
-  });
+  // var input = {'email': inputValue, 'password': 'conheo'};
+  // $.post( "http://localhost:8001/index.php/api/user/register", input, function(data) {
+  //   alert( "Data Loaded: " + data );
+  // });
 
   var span = document.createElement("SPAN");
   var txt = document.createTextNode("\u00D7");

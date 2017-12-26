@@ -25,6 +25,23 @@ class User_model extends CI_Model {
         return $query->row();
     }
 
+    public function get_user_by_token($token)
+    {
+        $this->db->select('*')->from('users');
+        $this->db->where('token', $token);
+        $query=$this->db->get();
+        return $query->row();
+    }
+
+    public function get_id_user_by_token()
+    {
+        $user = $this->get_user_by_token($this->input->post('token'));
+        if ($user) {
+            return $user->id;
+        }
+        return FALSE;
+    }
+
     public function update_token($id, $token)
     {
         $date = new DateTime();
