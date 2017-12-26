@@ -136,6 +136,7 @@ input {
 </ul>
 
 <script>
+var token = getParameterByName('token');
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -147,7 +148,6 @@ function getParameterByName(name, url) {
 }
 
 $( document ).ready(function() {
-  var token = getParameterByName('token');
   var input = {'token': token};
   $.post( "http://localhost:8002/index.php/api/todo/list", input, function(data) {
       console.log(data);
@@ -203,10 +203,11 @@ function newElement() {
   }
   document.getElementById("myInput").value = "";
 
-  // var input = {'email': inputValue, 'password': 'conheo'};
-  // $.post( "http://localhost:8001/index.php/api/user/register", input, function(data) {
-  //   alert( "Data Loaded: " + data );
-  // });
+  var input = {'token': token, 'content': inputValue};
+  $.post( "http://localhost:8002/index.php/api/todo/add", input, function(data) {
+      console.log(data);
+      // $('#myUL').append('<li>'+data[i].content+'</li>');    
+  });
 
   var span = document.createElement("SPAN");
   var txt = document.createTextNode("\u00D7");

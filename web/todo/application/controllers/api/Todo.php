@@ -51,6 +51,23 @@ class Todo extends REST_Controller {
         }
     }
 
+    public function add_post()
+    {
+        $userId = $this->todo_model->get_user_id();
+        $result = $this->todo_model->add($userId);
+        if ($userId && $result)
+        {
+            $this->set_response(['status' => TRUE], REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+        }
+        else
+        {
+            $this->set_response([
+                'status' => FALSE,
+                'message' => 'Can not add'
+            ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+        }
+    }
+
     public function register_get()
     {
         $slides = $this->user_model->get_user_by_email('hy@hd.com');

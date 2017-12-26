@@ -52,16 +52,6 @@ class User_model extends CI_Model {
             ->update('users');
     }
 
-    public function hash_password($old = '', $iterations = 0)
-    {
-        $password = $this->auth->hash_password($old, $iterations);
-        if (empty($password) || empty($password['hash'])) {
-            return false;
-        }
-
-        return array($password['hash'], $password['iterations']);
-    }
-
     public function register()
     {
         $user = $this->get_user_by_email($this->input->post('email'));
