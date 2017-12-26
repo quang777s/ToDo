@@ -152,7 +152,8 @@ $( document ).ready(function() {
   $.post( "http://localhost:8002/index.php/api/todo/list", input, function(data) {
       console.log(data);
       for (var i = 0; i < data.length; i++) {
-        $('#myUL').append('<li>'+data[i].content+'</li>')
+        var attr = data[i].is_complete == 1 ? 'class="checked"' : '';
+        $('#myUL').append('<li '+attr+'>'+data[i].content+'</li>')
       }      
   });
 
@@ -186,7 +187,18 @@ for (i = 0; i < close.length; i++) {
 var list = document.querySelector('ul');
 list.addEventListener('click', function(ev) {
   if (ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');
+    ev.target.classList.toggle('checked');console.log(ev.target.innerText);
+    if (ev.target.classList.length) {
+      var input = {'token': token, 'content': ev.target.innerText};
+      $.post( "http://localhost:8002/index.php/api/todo/complete", input, function(data) {
+          console.log(data); 
+      });
+    } else {
+      var input = {'token': token, 'content': ev.target.innerText};
+      $.post( "http://localhost:8002/index.php/api/todo/unmark", input, function(data) {
+          console.log(data); 
+      });
+    }
   }
 }, false);
 

@@ -22,3 +22,6 @@ Add: http://localhost:8002/api/todo/add (POST)
 Mark Resolve: http://localhost:8002/api/todo/complete (POST)  
 UnMark: http://localhost:8002/api/todo/unmark (POST)  
 Delete: http://localhost:8002/api/todo/delete (POST)  
+
+Please ask me if you can not install successfully. Thanks!
+quang777s@gmail.com 

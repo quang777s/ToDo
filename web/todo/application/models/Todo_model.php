@@ -56,4 +56,30 @@ class Todo_model extends CI_Model {
 
         return $this->db->insert('todo', $data);
     }
+
+    public function update_complete($content, $userId)
+    {
+        return $this->db->set('is_complete', TRUE)
+            ->where('content', $content)
+            ->where('user_id', $userId)
+            ->update('todo');
+    }
+
+    public function complete($userId)
+    {
+        return $this->update_complete($this->input->post('content'), $userId);
+    }
+
+    public function update_unmark($content, $userId)
+    {
+        return $this->db->set('is_complete', FALSE)
+            ->where('content', $content)
+            ->where('user_id', $userId)
+            ->update('todo');
+    }
+
+    public function unmark($userId)
+    {
+        return $this->update_unmark($this->input->post('content'), $userId);
+    }
 }
