@@ -102,7 +102,7 @@ $( document ).ready(function() {
         $.post( "http://localhost:8001/index.php/api/user/login", input, function(data) {
             console.log(data);
             if (data.status != false) {
-                // window.location.replace("http://localhost:8000/todo");
+                window.location.replace("http://localhost:8000/todo?token="+data.token);
             }
         });
         return false;
